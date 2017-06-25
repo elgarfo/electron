@@ -151,6 +151,8 @@ ui::KeyboardCode KeyboardCodeFromKeyIdentifier(const std::string& s,
     return ui::VKEY_MEDIA_PLAY_PAUSE;
   } else if (str == "printscreen") {
     return ui::VKEY_SNAPSHOT;
+  } else if (str == "pause") {
+    return ui::VKEY_PAUSE;
   } else if (str.size() > 1 && str[0] == 'f') {
     // F1 - F24.
     int n;
