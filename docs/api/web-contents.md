@@ -288,7 +288,10 @@ Returns:
 
 Emitted before dispatching the `keydown` and `keyup` events in the page.
 Calling `event.preventDefault` will prevent the page `keydown`/`keyup` events
-from being dispatched.
+and the menu shortcuts.
+
+To only prevent the menu shortcuts, use
+[`ignoreKeyboardShortcuts`](#contentsignorekeyboardshortcuts).
 
 #### Event: 'devtools-opened'
 
@@ -1334,5 +1337,10 @@ when the DevTools has been closed.
 #### `contents.debugger`
 
 A [Debugger](debugger.md) instance for this webContents.
+
+#### `contents.ignoreKeyboardShortcuts`
+
+A `Boolean` controlling whether keyboard shortcuts of menu items are
+triggered while this web contents is focused.
 
 [keyboardevent]: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent

@@ -564,6 +564,14 @@ bool WebContents::IsPopupOrPanel(const content::WebContents* source) const {
   return type_ == BROWSER_WINDOW;
 }
 
+bool WebContents::GetIgnoreKeyboardShortcuts() {
+  return is_ignore_keyboard_shortcuts();
+}
+
+void WebContents::SetIgnoreKeyboardShortcuts(bool ignore) {
+  set_ignore_keyboard_shortcuts(ignore);
+}
+
 void WebContents::HandleKeyboardEvent(
     content::WebContents* source,
     const content::NativeWebKeyboardEvent& event) {
@@ -581,10 +589,11 @@ bool WebContents::PreHandleKeyboardEvent(
     const content::NativeWebKeyboardEvent& event,
     bool* is_keyboard_shortcut) {
   if (event.type() == blink::WebInputEvent::Type::RawKeyDown ||
-      event.type() == blink::WebInputEvent::Type::KeyUp)
+      event.type() == blink::WebInputEvent::Type::KeyUp) {
     return Emit("before-input-event", event);
-  else
+  } else {
     return false;
+  }
 }
 
 void WebContents::EnterFullscreenModeForTab(content::WebContents* source,
@@ -1831,7 +1840,10 @@ void WebContents::BuildPrototype(v8::Isolate* isolate,
       .SetProperty("session", &WebContents::Session)
       .SetProperty("hostWebContents", &WebContents::HostWebContents)
       .SetProperty("devToolsWebContents", &WebContents::DevToolsWebContents)
-      .SetProperty("debugger", &WebContents::Debugger);
+      .SetProperty("debugger", &WebContents::Debugger)
+      .SetProperty("ignoreKeyboardShortcuts",
+                   &WebContents::GetIgnoreKeyboardShortcuts,
+                   &WebContents::SetIgnoreKeyboardShortcuts);
 }
 
 AtomBrowserContext* WebContents::GetBrowserContext() const {

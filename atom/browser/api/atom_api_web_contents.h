@@ -377,6 +377,9 @@ class WebContents : public mate::TrackableObject<WebContents>,
   // get the zoom level.
   void OnGetZoomLevel(IPC::Message* reply_msg);
 
+  bool GetIgnoreKeyboardShortcuts();
+  void SetIgnoreKeyboardShortcuts(bool ignore);
+
   v8::Global<v8::Value> session_;
   v8::Global<v8::Value> devtools_web_contents_;
   v8::Global<v8::Value> debugger_;

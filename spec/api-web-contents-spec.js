@@ -582,6 +582,15 @@ describe('webContents module', function () {
     })
   })
 
+  describe('ignoreKeyboardShortcuts property', function () {
+    it('is false by default', function () {
+      assert.equal(w.webContents.ignoreKeyboardShortcuts, false)
+
+      w.webContents.ignoreKeyboardShortcuts = true
+      assert.equal(w.webContents.ignoreKeyboardShortcuts, true)
+    })
+  })
+
   describe('destroy()', () => {
     let server
 
